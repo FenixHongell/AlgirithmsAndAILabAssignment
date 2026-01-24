@@ -1,1 +1,4 @@
 ﻿.idea
+src/DungeonGeneration/Library
+src/DungeonGeneration/Temp
+src/DungeonGeneration/Logs
