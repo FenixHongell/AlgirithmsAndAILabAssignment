@@ -1,48 +1,96 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[Serializable]
 public struct Room
 {
-    public Vector3Int Position, Size;
+    public Vector3Int Position;
+    public GameObject GameObject;
 }
 
+[RequireComponent(typeof(GridManager))]
 public class DungeonGenerator : MonoBehaviour
 {
-    [Header("Settings")]
-    public int roomCount = 10;
-    public Vector3Int maxRoomSize = new Vector3Int(5, 5, 1);
-    public Vector3Int minRoomSize = new Vector3Int(1, 1, 1);
-    
-    [Header("Rooms")]
-    public List<Room> Rooms;
-    
+    [Header("Settings")] public int roomCount = 10;
+    public int roomBuffer = 5;
+
+    [SerializeField] private List<GameObject> roomPrefabs;
+
+    [Header("Rooms")] public List<Room> Rooms = new List<Room>();
+
+    private GridManager _gridManager;
+
+    private List<(Vector3 a, Vector3 b)> _graph;
+    private List<(Vector3 a, Vector3 b, Vector3 c)> _debugTriangles;
+
+    private void OnEnable()
+    {
+        if (_gridManager == null)
+            _gridManager = GetComponent<GridManager>();
+    }
+
+    private bool EnsureInitialized()
+    {
+        if (_gridManager == null)
+            _gridManager = GetComponent<GridManager>();
+
+        if (_gridManager == null)
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: Missing GridManager component on the same GameObject.");
+            return false;
+        }
+
+        if (roomPrefabs == null || roomPrefabs.Count == 0)
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: roomPrefabs list is null or empty.");
+            return false;
+        }
+
+        if (roomPrefabs.Any(p => p == null))
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: roomPrefabs contains null entries.");
+            return false;
+        }
+
+        return true;
+    }
+
     [ContextMenu("Generate Dungeon")]
     public void ButtonEventGenerateDungeon()
     {
         Debug.Log($"{nameof(DungeonGenerator)}: GenerateDungeon invoked.");
-        
+        if (!EnsureInitialized()) return;
+
         GenerateCompleteDungeon();
     }
-    
+
     [ContextMenu("Generate Rooms")]
     public void ButtonEventGenerateRooms()
     {
-        Debug.Log($"{nameof(DungeonGenerator)}: GenerateDungeon invoked.");
-        
+        Debug.Log($"{nameof(DungeonGenerator)}: GenerateRooms invoked.");
+        if (!EnsureInitialized()) return;
+
         GenerateRooms();
     }
-    
+
     [ContextMenu("Reset")]
     public void ButtonEventReset()
     {
-        Debug.Log($"{nameof(DungeonGenerator)}: GenerateDungeon invoked.");
-        
+        Debug.Log($"{nameof(DungeonGenerator)}: Reset invoked.");
+        if (!EnsureInitialized()) return;
+
         Reset();
     }
 
     private void GenerateCompleteDungeon()
     {
-        
+        GenerateRooms();
+        _debugTriangles = GraphManager.CreateGraph(Rooms, _gridManager.gridOrigin.y);
+        DrawDebugTriangles(_debugTriangles);
     }
 
     private void GenerateRooms()
@@ -55,52 +103,71 @@ public class DungeonGenerator : MonoBehaviour
 
     private void CreateRoom()
     {
-        int randomX = Random.Range(0, GridManager.Instance.gridSize.x) + GridManager.Instance.gridOrigin.x;
-        int randomY = Random.Range(0, GridManager.Instance.gridSize.y) + GridManager.Instance.gridOrigin.y;
-        int randomZ = Random.Range(0, GridManager.Instance.gridSize.z) + GridManager.Instance.gridOrigin.z;
-        
-        int sizeX = Random.Range(minRoomSize.x, maxRoomSize.x);
-        int sizeY = Random.Range(minRoomSize.y, maxRoomSize.y);
-        int sizeZ = Random.Range(minRoomSize.z, maxRoomSize.z);
-        
-        Rooms.Add(new Room {Position = new Vector3Int(randomX, randomY, randomZ), Size = new Vector3Int(sizeX, sizeY, sizeZ)});
+        int randomX = Random.Range(0, _gridManager.gridSize.x) + _gridManager.gridOrigin.x;
+        int randomY = Random.Range(0, _gridManager.gridSize.y) + _gridManager.gridOrigin.y;
+        int randomZ = Random.Range(0, _gridManager.gridSize.z) + _gridManager.gridOrigin.z;
 
-        Instantiate(new GameObject(), new Vector3(randomX, randomY, randomZ), Quaternion.identity);
-    }
+        Vector3Int position = new Vector3Int(randomX, randomY, randomZ);
 
-    private bool CollidesOrTouchesExistingRoom(Room candidate)
-    {
-        const int gap = 1;
-        foreach (var room in Rooms)
+        var occupied = _gridManager.GetOccupiedCells();
+        if (occupied != null && occupied.Any(cell =>
+                Mathf.Abs(cell.Item1.x - position.x) <= roomBuffer &&
+                Mathf.Abs(cell.Item1.y - position.y) <= roomBuffer &&
+                Mathf.Abs(cell.Item1.z - position.z) <= roomBuffer))
         {
-            if (OverlapsWithGap(room, candidate, gap))
-                return true;
+            return;
         }
 
-        return false;
+        GameObject prefab = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
+        if (prefab == null)
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: Selected prefab is null.");
+            return;
+        }
 
+        GameObject roomObject = Instantiate(prefab, position, Quaternion.identity);
+
+        Room room = new Room
+        {
+            Position = position,
+            GameObject = roomObject
+        };
+
+        Rooms.Add(room);
+        _gridManager.AddToOccupiedCells(position, CellType.Room);
     }
-    
-    private static bool OverlapsWithGap(Room a, Room b, int gapCells)
-    {
-        var gap = new Vector3Int(gapCells, gapCells, gapCells);
-
-        Vector3Int aMin = a.Position - gap;
-        Vector3Int aMax = a.Position + a.Size + gap;
-
-        Vector3Int bMin = b.Position;
-        Vector3Int bMax = b.Position + b.Size;
-
-        bool overlapX = aMin.x < bMax.x && aMax.x > bMin.x;
-        bool overlapY = aMin.y < bMax.y && aMax.y > bMin.y;
-        bool overlapZ = aMin.z < bMax.z && aMax.z > bMin.z;
-
-        return overlapX && overlapY && overlapZ;
-    }
-
 
     private void Reset()
     {
-        
+        if (Rooms != null)
+        {
+            foreach (var room in Rooms)
+            {
+                if (room.GameObject != null)
+                {
+                    DestroyImmediate(room.GameObject);
+                }
+            }
+
+            Rooms.Clear();
+        }
+
+        _gridManager.Clear();
+    }
+
+    private void DrawDebugTriangles(List<(Vector3 a, Vector3 b, Vector3 c)> triangles)
+    {
+        if (triangles == null)
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: DrawDebugTriangles invoked with null triangles.");
+            return;
+        }
+
+        foreach (var triangle in triangles)
+        {
+            Debug.DrawLine(triangle.a, triangle.b, Color.red, 10f);
+            Debug.DrawLine(triangle.b, triangle.c, Color.red, 10f);
+            Debug.DrawLine(triangle.c, triangle.a, Color.red, 10f);
+        }
     }
 }

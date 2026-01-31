@@ -1001,6 +1001,10 @@
       <Project>{ebb091d0-dc46-a87d-31a2-2b39f9b351ef}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="Scripts.csproj">
+      <Project>{12bcfeec-3fec-1648-079e-08da9a9f99a8}</Project>
+      <Name>Scripts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
