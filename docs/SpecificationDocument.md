@@ -9,7 +9,7 @@ The purpose of this lab is to get a deeper understanding of the Boyer-Watson alg
 The algoritm will be implemented in C#, using Unity for graphics.
 
 ## Algorithms
-- Boyer-Watson
+- Boyer-Watson ✔️
 - Prims
 - Wave Function Collapse
 - A*
