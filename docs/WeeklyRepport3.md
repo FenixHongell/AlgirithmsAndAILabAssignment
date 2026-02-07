@@ -2,7 +2,7 @@
 
 ## Notes
 - This was probably the most "difficult" part of the project, due to the Boyer-Watson algorithm, hence why I decided to leave the easier stuff until next week & spend this week focused on understand the algorithm.
-- Details regarding LLM usage can be found in [LLMUsage.md]("LLMUsage.md")
+- Details regarding LLM usage can be found in LLMUsage.md
 
 ## Timetable
 

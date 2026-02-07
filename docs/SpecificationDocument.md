@@ -11,7 +11,7 @@ The algoritm will be implemented in C#, using Unity for graphics.
 ## Algorithms
 - Boyer-Watson
 - Prims
-- Wave Function Collapse
+- Wave Function Collapse (unimplemented)
 - A*
 
 ## Documentation
