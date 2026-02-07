@@ -23,6 +23,18 @@ public class DungeonGeneratorEditor : Editor
             EditorUtility.SetDirty(generator);
         }
         EditorGUILayout.Space();
+        if (GUILayout.Button("Draw triangles"))
+        {
+            generator.ButtonEventDrawTriangles();
+            EditorUtility.SetDirty(generator);
+        }
+        EditorGUILayout.Space();
+        if (GUILayout.Button("Draw MST"))
+        {
+            generator.ButtonEventDrawMST();
+            EditorUtility.SetDirty(generator);
+        }
+        EditorGUILayout.Space();
         if (GUILayout.Button("Reset"))
         {
             generator.ButtonEventReset();

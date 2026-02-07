@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d748353f62428bab7afd088b24acf6, type: 3}
+  m_Name: Config
+  m_EditorClassIdentifier: Assembly-CSharp::Src.Configs.DungeonGeneratorConfig
+  configName: Idk
+  size: {x: 100, y: 100}
+  roomCount: 10
+  roomMaxSize: {x: 3, y: 3}
+  prefab: {fileID: 1647295093037049849, guid: 7f199298852b05045b255f6696ebaa04, type: 3}
+  roomMaterial: {fileID: 2100000, guid: 4807f28d97d7e504b8cb3f3088821aab, type: 2}
+  pathMaterial: {fileID: 2100000, guid: 635f3b62c398dd4459be5e0317bf9076, type: 2}
+  luckyNumber: 0.125

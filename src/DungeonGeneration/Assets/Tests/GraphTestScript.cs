@@ -22,12 +22,12 @@ public class GraphTestScript
 
         var triangles = GraphManager.CreateGraph(predefinedRooms, 0);
 
-        var expectedGraph = new List<(Vector3 a, Vector3 b, Vector3 c)>
+        var expectedGraph = new List<Triangle>
         {
-            (new Vector3(0, 0, 0), new Vector3(10, 0, 0), new Vector3(4, 0, 3)),
-            (new Vector3(10, 0, 0), new Vector3(10, 0, 8), new Vector3(4, 0, 3)),
-            (new Vector3(10, 0, 8), new Vector3(0, 0, 6), new Vector3(4, 0, 3)),
-            (new Vector3(0, 0, 6), new Vector3(0, 0, 0), new Vector3(4, 0, 3)),
+            new Triangle(new Vector3(0, 0, 0), new Vector3(10, 0, 0), new Vector3(4, 0, 3)),
+            new Triangle(new Vector3(10, 0, 0), new Vector3(10, 0, 8), new Vector3(4, 0, 3)),
+            new Triangle(new Vector3(10, 0, 8), new Vector3(0, 0, 6), new Vector3(4, 0, 3)),
+            new Triangle(new Vector3(0, 0, 6), new Vector3(0, 0, 0), new Vector3(4, 0, 3)),
         };
 
         var expectedSet = ToTriangleKeySet(expectedGraph, Epsilon, out var expectedMap);
@@ -65,18 +65,18 @@ public class GraphTestScript
     // Helpers
 
     private static HashSet<string> ToTriangleKeySet(
-        IEnumerable<(Vector3 a, Vector3 b, Vector3 c)> tris,
+        IEnumerable<Triangle> tris,
         float eps,
         out Dictionary<string, string> prettyMap)
     {
         var set = new HashSet<string>();
         prettyMap = new Dictionary<string, string>();
 
-        foreach (var (a, b, c) in tris)
+        foreach (var t in tris)
         {
-            var key = TriangleKey(a, b, c, eps);
+            var key = TriangleKey(t.A, t.B, t.C, eps);
             if (!prettyMap.ContainsKey(key))
-                prettyMap[key] = PrettyTriangle(a, b, c);
+                prettyMap[key] = PrettyTriangle(t.A, t.B, t.C);
             set.Add(key);
         }
 

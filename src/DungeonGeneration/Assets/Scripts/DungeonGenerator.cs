@@ -20,12 +20,13 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] private List<GameObject> roomPrefabs;
 
-    [Header("Rooms")] public List<Room> Rooms = new List<Room>();
+    [Header("Rooms")] public Dictionary<Vector3Int, Room> Rooms = new Dictionary<Vector3Int, Room>();
 
     private GridManager _gridManager;
 
-    private List<(Vector3 a, Vector3 b)> _graph;
-    private List<(Vector3 a, Vector3 b, Vector3 c)> _debugTriangles;
+    private List<Triangle> _triangles;
+
+    private List<Edge> _mst = new List<Edge>();
 
     private void OnEnable()
     {
@@ -76,6 +77,25 @@ public class DungeonGenerator : MonoBehaviour
 
         GenerateRooms();
     }
+    
+    [ContextMenu("Draw Triangles")]
+    public void ButtonEventDrawTriangles()
+    {
+        Debug.Log($"{nameof(DungeonGenerator)}: Draw Triangles invoked.");
+        if (!EnsureInitialized()) return;
+
+        DrawDebugTriangles(_triangles);
+    }
+    
+    [ContextMenu("Draw MST")]
+    public void ButtonEventDrawMST()
+    {
+        Debug.Log($"{nameof(DungeonGenerator)}: DrawMST invoked.");
+        if (!EnsureInitialized()) return;
+        
+        DrawDebugMST(_mst);
+    }
+    
 
     [ContextMenu("Reset")]
     public void ButtonEventReset()
@@ -89,8 +109,9 @@ public class DungeonGenerator : MonoBehaviour
     private void GenerateCompleteDungeon()
     {
         GenerateRooms();
-        _debugTriangles = GraphManager.CreateGraph(Rooms, _gridManager.gridOrigin.y);
-        DrawDebugTriangles(_debugTriangles);
+        var roomsList = Rooms.Select(r => r.Value).ToList();
+        _triangles = GraphManager.CreateGraph(roomsList, _gridManager.gridOrigin.y);
+        _mst = GraphManager.GetMST(_triangles);
     }
 
     private void GenerateRooms()
@@ -133,7 +154,7 @@ public class DungeonGenerator : MonoBehaviour
             GameObject = roomObject
         };
 
-        Rooms.Add(room);
+        Rooms.Add(room.Position, room);
         _gridManager.AddToOccupiedCells(position, CellType.Room);
     }
 
@@ -143,9 +164,9 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach (var room in Rooms)
             {
-                if (room.GameObject != null)
+                if (room.Value.GameObject != null)
                 {
-                    DestroyImmediate(room.GameObject);
+                    DestroyImmediate(room.Value.GameObject);
                 }
             }
 
@@ -155,7 +176,7 @@ public class DungeonGenerator : MonoBehaviour
         _gridManager.Clear();
     }
 
-    private void DrawDebugTriangles(List<(Vector3 a, Vector3 b, Vector3 c)> triangles)
+    private void DrawDebugTriangles(List<Triangle> triangles)
     {
         if (triangles == null)
         {
@@ -165,9 +186,23 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var triangle in triangles)
         {
-            Debug.DrawLine(triangle.a, triangle.b, Color.red, 10f);
-            Debug.DrawLine(triangle.b, triangle.c, Color.red, 10f);
-            Debug.DrawLine(triangle.c, triangle.a, Color.red, 10f);
+            Debug.DrawLine(triangle.A, triangle.B, Color.red, 10f);
+            Debug.DrawLine(triangle.B, triangle.C, Color.red, 10f);
+            Debug.DrawLine(triangle.C, triangle.B, Color.red, 10f);
+        }
+    }
+    
+    private void DrawDebugMST(List<Edge> mst)
+    {
+        if (mst == null)
+        {
+            Debug.LogError($"{nameof(DungeonGenerator)}: DrawDebugMST invoked with null mst.");
+            return;
+        }
+        
+        foreach (var edge in mst)
+        {
+            Debug.DrawLine(edge.A, edge.B, Color.green, 10f);
         }
     }
 }

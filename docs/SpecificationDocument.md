@@ -16,3 +16,9 @@ The algoritm will be implemented in C#, using Unity for graphics.
 
 ## Documentation
 All available documentation will be written in english in accordance with international standards.
+
+## Sources
+- https://vazgriz.com/119/procedurally-generated-dungeons/
+
+## Study Program
+I belong to the Bachelor's in Computer Science (TKT) program at the University of Helsinki.

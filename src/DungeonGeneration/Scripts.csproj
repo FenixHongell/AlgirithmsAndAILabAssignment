@@ -51,6 +51,7 @@
     <Compile Include="Assets\Scripts\GraphManager.cs" />
     <Compile Include="Assets\Scripts\CellType.cs" />
     <Compile Include="Assets\Scripts\DungeonGeneratorEditor.cs" />
+    <Compile Include="Assets\Scripts\Triangle.cs" />
     <Compile Include="Assets\Scripts\Edge.cs" />
     <None Include="Assets\Scripts\Scripts.asmdef" />
     <Reference Include="UnityEngine">

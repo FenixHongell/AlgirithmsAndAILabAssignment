@@ -46,7 +46,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.12f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Src\scripts\PrimsAlgorithm.cs" />
+    <Compile Include="Assets\Src\scripts\Delaunay.cs" />
+    <Compile Include="Assets\Src\Globals\Globals.cs" />
+    <Compile Include="Assets\Libraries\BlueRaja\IFixedSizePriorityQueue.cs" />
+    <Compile Include="Assets\Src\Configs\DungeonGeneratorConfig.cs" />
+    <Compile Include="Assets\Src\scripts\DungeonGenerator.cs" />
+    <Compile Include="Assets\Libraries\BlueRaja\IPriorityQueue.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Src\scripts\Pathfinder.cs" />
+    <Compile Include="Assets\Libraries\BlueRaja\SimplePriorityQueue.cs" />
+    <Compile Include="Assets\Src\scripts\Graph.cs" />
+    <Compile Include="Assets\Libraries\BlueRaja\GenericPriorityQueue.cs" />
+    <Compile Include="Assets\Libraries\BlueRaja\GenericPriorityQueueNode.cs" />
+    <Compile Include="Assets\Src\scripts\Grid.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.2.12f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
