@@ -16,8 +16,8 @@ Whilst the other project was used as inspriation **NO CODE WAS COPIED**, all cod
 
 ## Timetable
 
-| Day   | Time Spent | Description                            |
-|-------|------------|----------------------------------------|
-| 4.2.  | 8h         | Refactor & Rewrite of the entire thing |
-| -     | -          | -                                      |
-| Total | 8h         |                                        |
+| Day   | Time Spent | Description          |
+|-------|------------|----------------------|
+| 4.2.  | 8h         | Rewrite & Research   |
+| 7.2   | 8h         | Rewrite & Bug Fixing |
+| Total | 16h        |                      |
