@@ -5,6 +5,9 @@ Whilst I initially did not want to look at any other code for the same thing, I 
 ## Note
 Whilst the other project was used as inspriation **NO CODE WAS COPIED**, all code was written by me.
 
+## Known Bugs
+- There is an issue where vertices are left out of the triangulation and as such left out of the rest of the process. I did not have time to find a solution for this.
+
 ## What did I learn?
 - You can overwrite operators on classes in C#, this proved very helpful in comparisons, and I would not have learnt this unless I looked at the other project.
 - Being able to easily add T[x, y] getters and setters to classes was something I would never intuitively have guessed you could do.

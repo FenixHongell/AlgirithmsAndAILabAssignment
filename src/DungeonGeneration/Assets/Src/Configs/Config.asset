@@ -20,3 +20,4 @@ MonoBehaviour:
   roomMaterial: {fileID: 2100000, guid: 4807f28d97d7e504b8cb3f3088821aab, type: 2}
   pathMaterial: {fileID: 2100000, guid: 635f3b62c398dd4459be5e0317bf9076, type: 2}
   luckyNumber: 0.125
+  seed: 2456

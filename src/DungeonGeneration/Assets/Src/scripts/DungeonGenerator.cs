@@ -49,7 +49,7 @@ namespace Src.scripts
 
         void Generate()
         {
-            _random = new Random(0);
+            _random = new Random(config.seed);
             _grid = new Grid<CellType>(config.size, Vector2Int.zero);
             _rooms = new List<Room>();
 
@@ -214,9 +214,9 @@ namespace Src.scripts
             List<Vertex> vertices = new List<Vertex>();
             foreach (Room room in _rooms)
             {
-                vertices.Add(new Vertex<Room>((Vector2)room.Bounds.position + room.Bounds.size / 2, room));
+                vertices.Add(new Vertex<Room>((Vector2)room.Bounds.position + ((Vector2)room.Bounds.size) / 2, room));
             }
-
+            
             _delaunay = Delaunay.Create(vertices);
 
             foreach (var edge in _delaunay.Edges)

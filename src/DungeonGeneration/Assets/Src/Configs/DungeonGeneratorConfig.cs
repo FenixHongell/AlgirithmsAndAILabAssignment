@@ -18,5 +18,7 @@ namespace Src.Configs
         
         /// Chance to add edge to to tree
         public double luckyNumber = 0.125;
+
+        public int seed = 2456;
     }
 }
