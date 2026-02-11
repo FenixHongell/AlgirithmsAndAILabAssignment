@@ -38,32 +38,29 @@ namespace Src.scripts
             public bool Equals(Triangle other) =>
                 other != null && A.Equals(other.A) && B.Equals(other.B) && C.Equals(other.C);
 
-            public override int GetHashCode() => A.GetHashCode() ^ B.GetHashCode();
+            public override int GetHashCode() => A.GetHashCode() ^ B.GetHashCode() ^ C.GetHashCode();
 
             public bool ContainsVertex(Vector3 p) => Vector3.Distance(p, A.Position) < Globals.SmallNumber ||
                                                      Vector3.Distance(p, B.Position) < Globals.SmallNumber ||
                                                      Vector3.Distance(p, C.Position) < Globals.SmallNumber;
-
+            
             public bool InCircle(Vector3 p)
             {
-                float aMagnitude = A.Position.sqrMagnitude;
-                float bMagnitude = B.Position.sqrMagnitude;
-                float cMagnitude = C.Position.sqrMagnitude;
+                double ax = (double)A.Position.x - p.x;
+                double ay = (double)A.Position.y - p.y;
+                double bx = (double)B.Position.x - p.x;
+                double by = (double)B.Position.y - p.y;
+                double cx = (double)C.Position.x - p.x;
+                double cy = (double)C.Position.y - p.y;
+                
+                double det = (ax * ax + ay * ay) * (bx * cy - cx * by) -
+                             (bx * bx + by * by) * (ax * cy - cx * ay) +
+                             (cx * cx + cy * cy) * (ax * by - bx * ay);
 
-                float cirX =
-                    (aMagnitude * (A.Position.y - B.Position.y) + bMagnitude * (A.Position.y - C.Position.y) +
-                     cMagnitude * (B.Position.y - A.Position.y)) / (A.Position.x * (C.Position.y - B.Position.y) +
-                                                                    B.Position.x * (A.Position.y - C.Position.y) +
-                                                                    C.Position.x * (B.Position.y - A.Position.y));
-                float cirY =
-                    (aMagnitude * (C.Position.x - B.Position.x) + bMagnitude * (A.Position.x - C.Position.x) +
-                     cMagnitude * (B.Position.x - A.Position.x)) / (A.Position.y * (C.Position.x - B.Position.x) +
-                                                                    B.Position.y * (A.Position.x - C.Position.x) +
-                                                                    C.Position.y * (B.Position.x - A.Position.x));
-
-                Vector3 cir = new Vector3(cirX / 2, cirY / 2, 0);
-
-                return Vector3.SqrMagnitude(p - cir) <= Vector3.SqrMagnitude(A.Position - cir);
+                double circumcenterSide = (bx * cy - cx * by) - (ax * cy - cx * ay) + (ax * by - bx * ay);
+    
+                if (circumcenterSide > 0) return det > 0.000001;
+                return det < -0.000001;
             }
 
             public static bool operator ==(Triangle A, Triangle B) {
@@ -92,33 +89,22 @@ namespace Src.scripts
                 A = a; B = b;
             }
             
-            public static bool operator ==(Edge a, Edge b) {
-                return (a.A == b.A || a.A == b.B)
-                       && (a.B == b.A || a.B == b.B);
+            public static bool operator ==(Edge a, Edge b)
+            {
+                return a != null && b != null && a.Equals(b);
             }
             public static bool operator !=(Edge a, Edge b) => !(a == b);
 
             public override bool Equals(object obj)
             {
-                if (obj is Edge e) return this == e;
+                if (obj is Edge e) return e.Equals(this);
                 return false;
             }
-            public bool Equals(Edge other) => other != null && A.Equals(other.A) && B.Equals(other.B);
+            public bool Equals(Edge other) =>  (A.Equals(other.A) && B.Equals(other.B)) || (A.Equals(other.B) && B.Equals(other.A));
             public override int GetHashCode() => A.GetHashCode() ^ B.GetHashCode();
             
-            public static bool AlmostEqual(Edge a, Edge b) => Delaunay.AlmostEqual(a.A, b.A) && Delaunay.AlmostEqual(a.B, b.B) || Delaunay.AlmostEqual(a.A, b.B) && Delaunay.AlmostEqual(a.B, b.A);
         }
 
-        static bool AlmostEqual(float x, float y)
-        {
-            return Mathf.Abs(x - y) <= float.Epsilon;
-        }
-
-        static bool AlmostEqual(Vertex a, Vertex b)
-        {
-            return AlmostEqual(a.Position.x, b.Position.x) && AlmostEqual(a.Position.y, b.Position.y);
-        }
-        
         public List<Vertex> Vertices { get; private set; }
         public List<Edge> Edges { get; private set; }
         public List<Triangle> Triangles { get; private set; }
@@ -162,6 +148,19 @@ namespace Src.scripts
             Vertex p2 = new Vertex(new Vector2(minX - 1, maxY + deltaMax));
             Vertex p3 = new Vertex(new Vector2(maxX + deltaMax, minY - 1));
             
+            Debug.DrawLine(new Vector3(p1.Position.x, 0, p1.Position.y),
+                new Vector3(p2.Position.x, 0, p2.Position.y),
+                Color.blue,
+                100f);
+            Debug.DrawLine(new Vector3(p2.Position.x, 0, p2.Position.y),
+                new Vector3(p3.Position.x, 0, p3.Position.y),
+                Color.blue,
+                100f);
+            Debug.DrawLine(new Vector3(p3.Position.x, 0, p3.Position.y),
+                new Vector3(p1.Position.x, 0, p1.Position.y),
+                Color.blue,
+                100f);
+            
             Triangles.Add(new Triangle(p1, p2, p3));
 
             foreach (Vertex v in Vertices)
@@ -185,7 +184,7 @@ namespace Src.scripts
                 {
                     for (int j = i + 1; j < polygon.Count; j++)
                     {
-                        if (Edge.AlmostEqual(polygon[i], polygon[j]))
+                        if (polygon[i].Equals(polygon[j]))
                         {
                             polygon[i].IsBad = true;
                             polygon[j].IsBad = true;

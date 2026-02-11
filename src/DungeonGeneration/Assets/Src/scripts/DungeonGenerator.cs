@@ -103,9 +103,16 @@ namespace Src.scripts
         {
             Debug.Log("Creating hallways...");
             List<PrimsAlgorithm.Edge> edges = new List<PrimsAlgorithm.Edge>();
+            
+            if (_delaunay.Edges.Count == 0)
+            {
+                Debug.LogError("No edges");
+                return;
+            }
 
             foreach (Delaunay.Edge edge in _delaunay.Edges)
             {
+               
                 edges.Add(new PrimsAlgorithm.Edge(edge.A, edge.B));
             }
 
