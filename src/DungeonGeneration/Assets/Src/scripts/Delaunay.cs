@@ -57,7 +57,7 @@ namespace Src.scripts
                                                                     C.Position.x * (B.Position.y - A.Position.y));
                 float cirY =
                     (aMagnitude * (C.Position.x - B.Position.x) + bMagnitude * (A.Position.x - C.Position.x) +
-                     cMagnitude * (B.Position.x - B.Position.x)) / (A.Position.y * (C.Position.x - B.Position.x) +
+                     cMagnitude * (B.Position.x - A.Position.x)) / (A.Position.y * (C.Position.x - B.Position.x) +
                                                                     B.Position.y * (A.Position.x - C.Position.x) +
                                                                     C.Position.y * (B.Position.x - A.Position.x));
 
@@ -66,13 +66,10 @@ namespace Src.scripts
                 return Vector3.SqrMagnitude(p - cir) <= Vector3.SqrMagnitude(A.Position - cir);
             }
 
-            public static bool operator ==(Triangle a, Triangle b)
-            {
-                // I am so incredibly thankful my IDE could do this for me, I did not want to write x.X.Equals(y.Y) 20 times
-                if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return false;
-                return (a.A.Equals(b.A) || a.A.Equals(b.B) || a.A.Equals(b.C))
-                       && (a.B.Equals(b.A) || a.B.Equals(b.B) || a.B.Equals(b.C))
-                       && (a.C.Equals(b.A) || a.C.Equals(b.B) || a.C.Equals(b.C));
+            public static bool operator ==(Triangle A, Triangle B) {
+                return (A.A == B.A || A.A == B.B || A.A == B.C)
+                       && (A.B == B.A || A.B == B.B || A.B == B.C)
+                       && (A.C == B.A || A.C == B.B || A.C == B.C);
             }
 
             public static bool operator !=(Triangle a, Triangle b) => !(a == b);
@@ -112,9 +109,9 @@ namespace Src.scripts
             public static bool AlmostEqual(Edge a, Edge b) => Delaunay.AlmostEqual(a.A, b.A) && Delaunay.AlmostEqual(a.B, b.B) || Delaunay.AlmostEqual(a.A, b.B) && Delaunay.AlmostEqual(a.B, b.A);
         }
 
-        static bool AlmostEqual(float x, float y) {
-            return Mathf.Abs(x - y) <= float.Epsilon * Mathf.Abs(x + y) * 2
-                   || Mathf.Abs(x - y) < float.MinValue;
+        static bool AlmostEqual(float x, float y)
+        {
+            return Mathf.Abs(x - y) <= float.Epsilon;
         }
 
         static bool AlmostEqual(Vertex a, Vertex b)

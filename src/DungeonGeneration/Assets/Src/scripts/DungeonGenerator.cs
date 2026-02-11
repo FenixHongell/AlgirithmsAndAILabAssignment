@@ -61,7 +61,7 @@ namespace Src.scripts
 
         void SpawnRooms()
         {
-            for (int i = 0; i < config.roomCount; i++)
+            while (_rooms.Count < config.roomCount)
             {
                 Vector2Int location = new Vector2Int(
                     _random.Next(0, config.size.x),
@@ -89,7 +89,7 @@ namespace Src.scripts
                 if (add)
                 {
                     _rooms.Add(newRoom);
-                    SpawnRoom(newRoom.Bounds.position, newRoom.Bounds.size);
+                    SpawnRoom(newRoom.Bounds.position, newRoom.Bounds.size, _rooms.Count - 1);
 
                     foreach (Vector2Int p in newRoom.Bounds.allPositionsWithin)
                     {
@@ -203,10 +203,19 @@ namespace Src.scripts
             gameObject.transform.localScale = new Vector3(size.x, 1, size.y);
             gameObject.GetComponent<MeshRenderer>().material = material;
         }
-
-        void SpawnRoom(Vector2Int location, Vector2Int roomSize)
+        
+        void InstantiateCube(Vector2Int location, Vector2Int size, Material material, string name)
         {
-            InstantiateCube(location, roomSize, config.roomMaterial);
+            GameObject gameObject =
+                Instantiate(config.prefab, new Vector3(location.x, 0, location.y), Quaternion.identity);
+            gameObject.name = name;
+            gameObject.transform.localScale = new Vector3(size.x, 1, size.y);
+            gameObject.GetComponent<MeshRenderer>().material = material;
+        }
+
+        void SpawnRoom(Vector2Int location, Vector2Int roomSize, int index)
+        {
+            InstantiateCube(location, roomSize, config.roomMaterial, $"Room_{index}" );;
         }
 
         void Triangulate()
