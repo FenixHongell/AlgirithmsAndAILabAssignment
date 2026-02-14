@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.0166632">
+  <test-suite type="TestSuite" id="1011" name="DungeonGeneration" fullname="DungeonGeneration" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.016663" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1005" name="Tests.dll" fullname="C:/Users/fenix/RiderProjects/AlgirithmsAndAILabAssignment/src/DungeonGeneration/Library/ScriptAssemblies/Tests.dll" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.006775" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21872" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="DelauneyTest" fullname="DelauneyTest" classname="DelauneyTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.002255" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="Create_WithSquareAndCenter_ProducesDelaunayTriangles_AndNonDegenerateUniqueEdges" fullname="DelauneyTest.Create_WithSquareAndCenter_ProducesDelaunayTriangles_AndNonDegenerateUniqueEdges" methodname="Create_WithSquareAndCenter_ProducesDelaunayTriangles_AndNonDegenerateUniqueEdges" classname="DelauneyTest" runstate="Runnable" seed="1921656376" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.000271" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1003" name="MSTTest" fullname="MSTTest" classname="MSTTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.002097" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1004" name="GetMST_WithDisconnectedGraph_ReturnsPartialTree_AndDoesNotThrow" fullname="MSTTest.GetMST_WithDisconnectedGraph_ReturnsPartialTree_AndDoesNotThrow" methodname="GetMST_WithDisconnectedGraph_ReturnsPartialTree_AndDoesNotThrow" classname="MSTTest" runstate="Runnable" seed="1437946601" result="Passed" start-time="2026-02-14 17:52:01Z" end-time="2026-02-14 17:52:01Z" duration="0.000114" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/fenix/AppData/LocalLow/DefaultCompany/DungeonGeneration\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
