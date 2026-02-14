@@ -1,0 +1,6 @@
+﻿{
+  "name": "Src",
+  "references": [
+    "Libraries"
+  ]
+}

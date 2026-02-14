@@ -46,7 +46,8 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.12f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Tests\GraphTestScript.cs" />
+    <Compile Include="Assets\Tests\MSTTest.cs" />
+    <Compile Include="Assets\Tests\DelauneyTest.cs" />
     <None Include="Assets\Tests\Tests.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.2.12f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -819,6 +820,16 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:\Users\fenix\RiderProjects\AlgirithmsAndAILabAssignment\src\DungeonGeneration\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Src.csproj">
+      <Project>{17e1e971-4a42-e731-c70c-b9a0a0704246}</Project>
+      <Name>Src</Name>
+    </ProjectReference>
+    <ProjectReference Include="Libraries.csproj">
+      <Project>{d762f1c4-ea10-2ad7-f666-7fd417043b87}</Project>
+      <Name>Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
