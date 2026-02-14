@@ -20,3 +20,6 @@
 3. Let Unity import packages and assets on first open (this can take several minutes).
 4. Open the main scene if not opened by default
 5. Press the Play button in the Unity Editor toolbar to run.
+
+## How to run tests
+Test can be run from Unity, go to Window -> General -> Test Runner
