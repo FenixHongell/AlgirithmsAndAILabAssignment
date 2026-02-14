@@ -1,4 +1,4 @@
-﻿This week was spent fixing bugs and writing tests.
+﻿This week was spent fixing bugs and writing tests. I was sadly super busy this week so did not have time to create as many tests as I would have liked but will make sure to implement them until next week.
 
 ## Note
 - Removed all the files for the old implementation. This includes the GUI since it is no longer necessary.
