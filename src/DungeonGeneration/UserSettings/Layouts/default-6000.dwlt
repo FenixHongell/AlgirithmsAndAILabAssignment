@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 107
+  controlID: 37
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 17
+  controlID: 38
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18
+  controlID: 39
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -300,8 +300,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 809
+    x: 8
+    y: 872
     width: 2614
     height: 514
   m_SerializedDataModeController:
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scenes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -336,16 +336,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\fenix\RiderProjects\AlgirithmsAndAILabAssignment\src\DungeonGeneration
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d0ac0000
-    m_LastClickedID: 44240
-    m_ExpandedIDs: 00000000c8ab0000
+    m_SelectedIDs: dcac0000
+    m_LastClickedID: 44252
+    m_ExpandedIDs: 00000000a4ab000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -374,7 +374,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c8ab0000
+    m_ExpandedIDs: 00000000a4ab0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -453,8 +453,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2616
-    y: 24
+    x: 2623
+    y: 87
     width: 808
     height: 1299
   m_SerializedDataModeController:
@@ -502,8 +502,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 24
+    x: 8
+    y: 87
     width: 647
     height: 759
   m_SerializedDataModeController:
@@ -522,7 +522,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 14fbffff
+      m_ExpandedIDs: 74f6ffff14fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -568,8 +568,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 649
-    y: 24
+    x: 656
+    y: 87
     width: 1965
     height: 759
   m_SerializedDataModeController:
@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 55.87761, y: 2.2963293, z: 53.52105}
     speed: 2
-    m_Value: {x: -13.517119, y: 59.26722, z: 35.104458}
+    m_Value: {x: 55.87761, y: 2.2963293, z: 53.52105}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1008,11 +1008,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.047848895, y: -0.9367601, z: 0.31706557, w: -0.1406496}
     speed: 2
-    m_Value: {x: 0.28137577, y: 0.67997044, z: -0.3202811, w: 0.59664786}
+    m_Value: {x: 0.047848895, y: 0.9367601, z: -0.31706557, w: 0.1406496}
   m_Size:
-    m_Target: 52.89269
+    m_Target: 102.3623
     speed: 2
-    m_Value: 0.5722172
+    m_Value: 102.3623
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1

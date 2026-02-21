@@ -29,4 +29,6 @@ public class MSTTest
         var only = mst[0];
         Assert.True((only.A.Equals(a) && only.B.Equals(b)) || (only.A.Equals(b) && only.B.Equals(a)));
     }
+    
+
 }

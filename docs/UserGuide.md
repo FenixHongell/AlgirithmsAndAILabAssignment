@@ -11,14 +11,14 @@
 1. Clone the project
     - Using Git:
       ```bash
-      git clone <REPOSITORY_URL>
+      git clone https://github.com/FenixHongell/AlgirithmsAndAILabAssignment.git
       ```
     - Or download and extract the ZIP.
 2. Open the project in Unity Hub
     - In Unity Hub, click Add project from disk and select the project folder (the one containing the Assets and ProjectSettings folders).
     - If prompted, install/open with the specified Unity version.
 3. Let Unity import packages and assets on first open (this can take several minutes).
-4. Open the main scene if not opened by default
+4. Open the main scene if not opened by default (Assets -> Scenes -> SampleScene)
 5. Press the Play button in the Unity Editor toolbar to run.
 
 ## How to run tests
