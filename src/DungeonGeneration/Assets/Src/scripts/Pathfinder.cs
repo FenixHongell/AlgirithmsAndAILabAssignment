@@ -69,6 +69,14 @@ namespace Src.scripts
             }
         }
 
+        /// Finds the shortest path between two points within a grid using a specified heuristic function.
+        /// <param name="start">The starting position of the path as a Vector2Int.</param>
+        /// <param name="end">The ending position of the path as a Vector2Int.</param>
+        /// <param name="heuristic">A function defining the heuristic to calculate the traversal cost between two nodes.</param>
+        /// <returns>
+        /// A list of Vector2Int representing the path from the start to the end position.
+        /// Returns null if no valid path exists.
+        /// </returns>
         public List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Func<Node, Node, PathCost> heuristic)
         {
             Reset();

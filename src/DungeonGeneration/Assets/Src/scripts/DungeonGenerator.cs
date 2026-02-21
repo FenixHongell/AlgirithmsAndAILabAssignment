@@ -47,6 +47,15 @@ namespace Src.scripts
             Generate();
         }
 
+        /// <summary>
+        /// Generates a dungeon layout based on the specified configuration.
+        /// </summary>
+        /// <remarks>
+        /// This method initializes the random number generator and grid based on the provided
+        /// DungeonGeneratorConfig. It also creates rooms, performs triangulation for connecting
+        /// them, generates hallways, and identifies hallway segments. The generated dungeon is
+        /// constructed as a combination of rooms and hallways.
+        /// </remarks>
         void Generate()
         {
             _random = new Random(config.seed);
@@ -59,6 +68,15 @@ namespace Src.scripts
             FindHallways();
         }
 
+        /// <summary>
+        /// Spawns randomly placed rooms in the dungeon layout based on the given configuration.
+        /// </summary>
+        /// <remarks>
+        /// This method generates rooms by selecting random locations and sizes within the grid. It ensures
+        /// that rooms do not overlap by checking against existing rooms and their buffered boundaries. Rooms
+        /// that exceed grid boundaries or collide with others are discarded. Successfully placed rooms are
+        /// marked within the grid and stored for further processing.
+        /// </remarks>
         void SpawnRooms()
         {
             while (_rooms.Count < config.roomCount)
@@ -99,6 +117,16 @@ namespace Src.scripts
             }
         }
 
+        /// <summary>
+        /// Creates and connects hallways between rooms in the dungeon layout using a minimum spanning tree
+        /// and additional randomized connections.
+        /// </summary>
+        /// <remarks>
+        /// This method converts Delaunay edges into a format suitable for processing, generates a minimum
+        /// spanning tree (MST) using Prim's algorithm, and optionally includes additional edges based on
+        /// a probability defined in the configuration. The resulting edge set represents the hallways
+        /// that connect rooms. Visual debugging lines are drawn to represent the connections.
+        /// </remarks>
         void CreateHallways()
         {
             Debug.Log("Creating hallways...");
@@ -141,6 +169,15 @@ namespace Src.scripts
             }
         }
 
+        /// <summary>
+        /// Identifies and maps hallway paths between rooms in the dungeon layout.
+        /// </summary>
+        /// <remarks>
+        /// This method utilizes a pathfinding algorithm to determine optimal paths between connected rooms in the dungeon
+        /// by analyzing the generated edges from a spanning tree. It updates the dungeon grid based on the paths found
+        /// and modifies cell states to reflect their classification as hallways. Pathfinding costs are dynamically
+        /// adjusted according to the existing cell types in the grid to prioritize or discourage certain pathways.
+        /// </remarks>
         void FindHallways()
         {
             Debug.Log("Finding hallways...");
@@ -224,7 +261,7 @@ namespace Src.scripts
         {
             InstantiateCube(location, roomSize, config.roomMaterial, $"Room_{index}" );;
         }
-
+        
         void Triangulate()
         {
             List<Vertex> vertices = new List<Vertex>();

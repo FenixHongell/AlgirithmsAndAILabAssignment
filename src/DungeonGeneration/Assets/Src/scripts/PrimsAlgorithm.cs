@@ -26,6 +26,10 @@ namespace Src.scripts
             public override int GetHashCode() => A.GetHashCode() ^ B.GetHashCode();
         }
 
+        /// Generates the Minimum Spanning Tree (MST) of a given graph using Prim's algorithm.
+        /// <param name="edges">A list of edges representing the graph. Each edge connects two vertices and includes a weight (distance).</param>
+        /// <param name="start">The starting vertex for the MST generation.</param>
+        /// <return>A list of edges representing the MST. If the graph is disconnected, a partial MST for the connected component containing the start vertex is returned.</return>
         public static List<Edge> GetMST(List<Edge> edges, Vertex start)
         {
             HashSet<Vertex> open = new HashSet<Vertex>();

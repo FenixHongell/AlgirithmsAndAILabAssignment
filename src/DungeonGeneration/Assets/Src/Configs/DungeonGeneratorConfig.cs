@@ -7,8 +7,6 @@ namespace Src.Configs
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnManagerScriptableObject", order = 1)]
     public class DungeonGeneratorConfig : ScriptableObject
     {
-        public string configName;
-        
         public Vector2Int size;
         public int roomCount;
         public Vector2Int roomMaxSize;
