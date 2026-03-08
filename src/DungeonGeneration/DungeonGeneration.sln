@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries.csproj", "{d762f1c4-ea10-2ad7-f666-7fd417043b87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{ebb091d0-dc46-a87d-31a2-2b39f9b351ef}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,8 @@ Global
 		{4d149185-07d1-9a3b-3f34-475f2a800216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{d762f1c4-ea10-2ad7-f666-7fd417043b87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{d762f1c4-ea10-2ad7-f666-7fd417043b87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ebb091d0-dc46-a87d-31a2-2b39f9b351ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ebb091d0-dc46-a87d-31a2-2b39f9b351ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d748353f62428bab7afd088b24acf6, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: Assembly-CSharp::Src.Configs.DungeonGeneratorConfig
-  configName: Idk
   size: {x: 100, y: 100}
   roomCount: 10
   roomMaxSize: {x: 3, y: 3}
@@ -20,4 +19,4 @@ MonoBehaviour:
   roomMaterial: {fileID: 2100000, guid: 4807f28d97d7e504b8cb3f3088821aab, type: 2}
   pathMaterial: {fileID: 2100000, guid: 635f3b62c398dd4459be5e0317bf9076, type: 2}
   luckyNumber: 0.125
-  seed: 2456
+  seed: 245
